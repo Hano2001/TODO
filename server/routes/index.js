@@ -1,29 +1,43 @@
 var express = require("express");
+
+const listModel = require("../models/todoList");
 var router = express.Router();
 
-const kittens = [
-  {
-    id: 1,
-    name: "Lucy",
-    gender: "female",
-    birthDate: "2016-08-17",
-    color: "gray",
-  },
-  {
-    id: 2,
-    name: "Sasha",
-    gender: "female",
-    birthDate: "2003-05-27",
-    color: "white",
-  },
-];
+// const todo = [
+//   {
+//     id: 1,
+//     item1: "Lorem",
+//     item2: "Ipsum",
+//     item3: "Lorem",
+//     item4: "Ipsum",
+//   },
+//   {
+//     id: 2,
+//     item1: "Lorem2",
+//     item2: "Ipsum2",
+//     item3: "Lorem2",
+//     item4: "Ipsum2",
+//   },
+// ];
 
 router.get("/", function (req, res, next) {
-  res.json({ name: "Harald" });
+  let lists = listModel.find({}, function (err, obj) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(obj);
+    }
+  });
 });
 
-router.get("/kittens", function (req, res, next) {
-  res.json(kittens);
+router.get("/todo", function (req, res, next) {
+  let lists = listModel.find({}, function (err, obj) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(obj);
+    }
+  });
 });
 
 router.get("/api/todo", (req, res, next) => {});

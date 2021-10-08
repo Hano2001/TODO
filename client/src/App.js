@@ -1,25 +1,18 @@
 import "./App.css";
 
 function App() {
-  let kittens = fetch("http://localhost:3000/kittens").then((res) =>
-    res.json()
-  );
+  let list = fetch("http://localhost:3000/todo").then((res) => res.json());
 
   async function window() {
-    let test = await kittens;
-    let testArray = [];
+    let test = await list;
 
-    test.forEach((element) => {
-      testArray.push(element);
-    });
-    //let test2 = JSON.stringify(test[1]);
-    //console.log(await Object.keys(kittens).length);
-    alert(testArray[1].name);
+    console.log(test);
   }
   return (
     <div className="App">
       <h1>TODO START</h1>
-      <button onClick={window}>KLICKA</button>
+
+      <button onClick={window}>KLICKA HÄR</button>
     </div>
   );
 }
