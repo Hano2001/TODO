@@ -1,25 +1,36 @@
-import { deleteData } from "../utilities/delete";
-import { useFetch } from "../utilities/useFetch";
+import axios from "axios";
+import React, {useEffect,useState} from "react";
+import ListCard from "../components/ListCard";
 
 
 export default function ListPage() {
-    const url = "http://localhost:3000/todo";
-    const listData= useFetch(url);
-    console.log(listData)
-
+    const [listData, setListData] = useState(null);
     
+    
+
+    async function getListData(){
+      
+        const {data} = await axios.get("http://localhost:5000/lists");
+        await setListData(data.data.list);
+        console.log(data.data.list);
+        
+        
+        
+    }
+
+  
+
+    useEffect(()=>{
+        getListData()
+        
+    },[]);
 
      
     return (
         <div>
-            {listData.map((item, index)=>{
-                return <div key={item._id}>
-                    
-                        <h3>{item.title}</h3>
-                        <p>{item.content}</p>
-                        
-                    </div>
-            })}
+           
+            {listData ? listData.map((item, index)=><ListCard list = {item} key = {item._id}/>) : (<h5>Laddar...</h5>)}
+            
         </div>
     )
 }
