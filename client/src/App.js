@@ -1,18 +1,36 @@
+import React, { useState, useEffect } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 import "./App.css";
+import { ContextInfo } from "./contexts/ContextInfo";
+import ListPage from "./pages/ListPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  let list = fetch("http://localhost:3000/todo").then((res) => res.json());
+  // const history = useHistory();
+  // useEffect(() => {
+  //   history.push("/home");
+  // }, []);
 
-  async function window() {
-    let test = await list;
+  const [listData, setlistData] = useState({});
 
-    console.log(test);
-  }
+  const contextValues = {
+    listData,
+    setlistData,
+  };
+
   return (
     <div className="App">
       <h1>TODO START</h1>
-
-      <button onClick={window}>KLICKA HÄR</button>
+      <ContextInfo.Provider value={contextValues}>
+        <Switch>
+          <Route path="/home">
+            <HomePage />
+          </Route>
+          <Route exact path="/listpage">
+            <ListPage />
+          </Route>
+        </Switch>
+      </ContextInfo.Provider>
     </div>
   );
 }

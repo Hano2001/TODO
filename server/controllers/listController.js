@@ -80,3 +80,37 @@ exports.updateList = async (req, res) => {
     });
   }
 };
+
+exports.getSingleList = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const list = await List.findById(id);
+    res.status(200).json({
+      status: "success",
+      data: {
+        list,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
+exports.deleteList = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await List.findByIdAndDelete(id);
+    res.status(200).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};

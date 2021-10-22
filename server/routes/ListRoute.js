@@ -11,6 +11,6 @@ const router = express.Router();
 
 router.route("/").get(getLists).post(createList);
 
-router.route("/:id").get().patch(updateList).delete();
+router.route("/:id").get(getSingleList).patch(updateList).delete(deleteList);
 
 module.exports = router;
