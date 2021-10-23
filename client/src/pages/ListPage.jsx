@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, {useEffect,useState} from "react";
-import ListCard from "../components/ListCard";
+//import ListCard from "../components/ListCard";
 import { Link } from 'react-router-dom';
+import {StyledDiv,Container} from '../components/Styled';
 
 
 export default function ListPage() {
@@ -19,6 +20,33 @@ export default function ListPage() {
         
     }
 
+    function deleteList(id) {
+        axios
+        .delete(`http://localhost:5000/lists/${id}`)
+        .then(() => {
+          alert("List deleted!");
+        
+          getListData();
+        
+          
+        });
+    }
+
+    function ListCard({list}) {
+
+   
+        return (
+            
+            <StyledDiv>
+                
+                <h2>{list.title}</h2>
+                <p>{list.content}</p>
+                <button type="button" onClick={() => deleteList(list._id)}>DELETE</button>
+                
+            </StyledDiv>
+            
+        )
+    }
   
 
     useEffect(()=>{
@@ -28,10 +56,10 @@ export default function ListPage() {
 
      
     return (
-        <div>
+        <Container>
            
             {listData ? listData.map((item, index)=><ListCard list = {item} key = {item._id}/>) : (<h5>Laddar...</h5>)}
             <Link to="/createlist">Skapa ny lista</Link>
-        </div>
+            </Container>
     )
 }
