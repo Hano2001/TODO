@@ -4,14 +4,16 @@ import "./App.css";
 import ListPage from "./pages/ListPage";
 import HomePage from "./pages/HomePage";
 import CreateListPage from "./pages/CreateListPage";
+import NavBar from "./components/NavBar";
 
 function App() {
 
 
   return (
     <div className="App">
-      <h1>TODO START</h1>
+      <NavBar/>
       
+        
         <Switch>
           <Route path="/home">
             <HomePage />
