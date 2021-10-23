@@ -3,6 +3,7 @@ import { Switch, Route} from "react-router-dom";
 import "./App.css";
 import ListPage from "./pages/ListPage";
 import HomePage from "./pages/HomePage";
+import CreateListPage from "./pages/CreateListPage";
 
 function App() {
 
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route exact path="/listpage">
             <ListPage />
+          </Route>
+          <Route path="/createlist">
+            <CreateListPage/>
           </Route>
         </Switch>
   
