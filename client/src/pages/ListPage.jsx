@@ -14,7 +14,7 @@ export default function ListPage() {
       
         const {data} = await axios.get("http://localhost:5000/lists");
         await setListData(data.data.list);
-        console.log(data.data.list);
+        console.log(data.data.list[0].content);
         
         
         
@@ -32,19 +32,51 @@ export default function ListPage() {
         });
     }
 
-    function ListCard({list}) {
+   function addItem(e, id) {
+        e.preventDefault();
+       console.log(e.target[0].value);
+       console.log(id)
+       
+       const newItem = e.target[0].value;
+       const payload = {
+           item : newItem,
+       }
+       axios({
+        url: `http://localhost:5000/lists/${id}`,
+        method: 'POST',
+        data: payload,
+      });
+      getListData();
+    }
 
-   
-        return (
-            
+    function ListCard({list}) {
+        console.log(list.content);
+            return (
+            <div>
+              
             <StyledDiv>
-                
+            <form onSubmit={e=>addItem(e, list._id)}>
+                <label  htmlFor="item">Add Item: </label>
+                <input  type="text" name="item" id="item"/>
+                <button type="submit">Add to list</button>
+
+            </form>
                 <h2>{list.title}</h2>
-                <p>{list.content}</p>
-                <button type="button" onClick={() => deleteList(list._id)}>DELETE</button>
+                {list.content.map((item)=>{
+                   return (
+                   <div>
+                   <p key= {item.Title}>{item.Title}</p> 
+                   <button>DONE</button>
+                   </div>)
+                })}
+                
+                
                 
             </StyledDiv>
             
+         
+            <button type="button" onClick={() => deleteList(list._id)}>DELETE LIST</button>
+            </div>
         )
     }
   

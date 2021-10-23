@@ -21,10 +21,10 @@ exports.getLists = async (req, res) => {
 
 exports.createList = async (req, res) => {
   const title = req.body.title;
-  const content = req.body.content;
+  
   try {
     console.log(`TITLE: ${title}`);
-    console.log(`CONTENT: ${content}`);
+    
     console.log(req.body);
     const listExists = await List.exists({ title: req.body.title });
         if (listExists) {
@@ -72,17 +72,26 @@ exports.createList = async (req, res) => {
 
 exports.updateList = async (req, res) => {
   const id = req.params.id;
-  const data = req.body;
-  console.log(data);
+  const item = req.body.item;
+  console.log(item);
   try {
-    const list = await List.findByIdAndUpdate(id, data, {
-      new: true,
-      runValidators: true,
-    });
+    const list = await List.findByIdAndUpdate(
+    {
+     _id: id, 
+    },
+    {
+      $push:{
+        content:{
+          Title:item,
+          Done: false,
+        }
+      }
+    }
+    );
     res.status(200).json({
       status: "success",
       data: {
-        list,
+        item,
       },
     });
   } catch (err) {

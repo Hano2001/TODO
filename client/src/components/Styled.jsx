@@ -9,13 +9,20 @@ display: grid;
 
 `
 const StyledDiv = styled.div`
+  margin: 20px;
+  background: yellow;
   border: solid black;
-  
-  
-  button{
-      background: red;
-      
+  div{
+    font-family: comic sans ms;
+    font-weight: bold;
+    color: yellow;
+    background: coral;
+    border: solid black;
+    padding: 15px;
+    margin: 10px;
   }
+  
+  
   `;
 //   function deleteList(id) {
 //     axios
