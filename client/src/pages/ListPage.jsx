@@ -55,6 +55,7 @@ export default function ListPage() {
             <div>
               
             <StyledDiv>
+            <p>Last edited: {list.edited}</p>
             <form onSubmit={e=>addItem(e, list._id)}>
                 <label  htmlFor="item">Add Item: </label>
                 <input  type="text" name="item" id="item"/>
@@ -71,11 +72,11 @@ export default function ListPage() {
                 })}
                 
                 
-                
+               <button type="button" onClick={() => deleteList(list._id)}>DELETE LIST</button> 
             </StyledDiv>
             
          
-            <button type="button" onClick={() => deleteList(list._id)}>DELETE LIST</button>
+            
             </div>
         )
     }

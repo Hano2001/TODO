@@ -9,6 +9,10 @@ const listSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    edited: {
+      type: String,
+      default:""
+    }
   },
   { collection: "todo" }
 );

@@ -48,45 +48,36 @@ exports.createList = async (req, res) => {
   }
 };
 
-// exports.createList = async (req, res) => {
-//   try {
-//     const listExists = await List.exists({ title: req.body.title });
-//     if (listExists) {
-//       throw Error("List already exists");
-//     } else {
-//       const newList = await List.create(req.body);
-//       res.status(201).json({
-//         status: "success",
-//         data: {
-//           newList,
-//         },
-//       });
-//     }
-//   } catch (err) {
-//     res.status(400).json({
-//       status: "fail",
-//       message: err.message,
-//     });
-//   }
-// };
+
 
 exports.updateList = async (req, res) => {
   const id = req.params.id;
   const item = req.body.item;
-  console.log(item);
+  let currentDate = new Date();
+  let today = currentDate.getDate() + "/"
+  + (currentDate.getMonth()+1)  + "/" 
+  + currentDate.getFullYear();
+  console.log(today);
   try {
     const list = await List.findByIdAndUpdate(
     {
      _id: id, 
     },
+    
+      
+    
     {
+      edited: today,
       $push:{
         content:{
           Title:item,
           Done: false,
         }
-      }
-    }
+      },
+      
+    },
+    
+    
     );
     res.status(200).json({
       status: "success",

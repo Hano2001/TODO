@@ -17,11 +17,15 @@ export default function NavBar() {
         {
             name: "Create New List",
             path: "/createlist"
+        },
+        {
+            name:"TEST",
+            path:"TEST"
         }
     ];
     return (
     <StyledNav>
-        <h2>Todo maddafakka</h2>
+        
         <div>
       { navItems.map((item) =>(
            
