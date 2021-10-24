@@ -1,9 +1,13 @@
 import React,{useState} from 'react'
 import axios from 'axios';
-import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateListPage() {
-    
+    let history = useHistory();
+    const redirect = ()=>{
+        history.push('/listpage');
+
+    }
 
     async function sendForm(e) {
         e.preventDefault();
@@ -18,7 +22,8 @@ export default function CreateListPage() {
           url: 'http://localhost:5000/lists',
           method: 'POST',
           data: payload,
-        });
+        }).then(alert('List Created!'))
+        .then(redirect())
     
         
     }
