@@ -1,14 +1,8 @@
-import React,{useState} from 'react'
+import React from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { StyledDiv } from './Styled';
 
-export default function CreateListPage() {
-    let history = useHistory();
-    const redirect = ()=>{
-        history.push('/listpage');
-
-    }
-
+export default function CreateList() {
     async function sendForm(e) {
         e.preventDefault();
         const listTitle = e.target[0].value;
@@ -22,20 +16,19 @@ export default function CreateListPage() {
           url: 'http://localhost:5000/lists',
           method: 'POST',
           data: payload,
-        }).then(alert('List Created!'))
-        .then(redirect())
+        }).then(alert('List Created!'));
     
         
     }
     return (
-        <div>
-            <h1>SKAPA LISTA</h1>
+        <StyledDiv>
+            <h3>Create new list</h3>
             <form onSubmit={sendForm}>
-                <label htmlFor="title">Titel: </label>
+                <label htmlFor="title">Title: </label>
                 <input  type="text" name="title" id="title"/>
-                <button type="submit">SKAPA</button>
+                <button type="submit">Create</button>
 
             </form>
-        </div>
+        </StyledDiv>
     )
 }

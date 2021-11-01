@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {useEffect,useState} from "react";
-//import ListCard from "../components/ListCard";
 import { Link } from 'react-router-dom';
+import CreateList from "../components/CreateList";
 import {StyledDiv,Container} from '../components/Styled';
 
 
@@ -14,7 +14,7 @@ export default function ListPage() {
       
         const {data} = await axios.get("http://localhost:5000/lists");
         await setListData(data.data.list);
-        console.log(data.data.list[0].content);
+        
         
         
         
@@ -89,10 +89,13 @@ export default function ListPage() {
 
      
     return (
+        <div>
+            <CreateList/>
         <Container>
            
             {listData ? listData.map((item, index)=><ListCard list = {item} key = {item._id}/>) : (<h5>Laddar...</h5>)}
             
             </Container>
+            </div>
     )
 }
