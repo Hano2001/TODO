@@ -5,10 +5,20 @@ const listSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    content: {
-      type: Array,
+    content: [{
+      id:{
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
-    },
+      },
+      title:{
+        type:String,
+        required: true,
+      },
+      done:{
+        type: Boolean,
+        default: false,
+      }
+    }],
     edited: {
       type: String,
       default:""

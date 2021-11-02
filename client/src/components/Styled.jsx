@@ -41,6 +41,11 @@ display: grid;
 
 
 `
+const DoneDiv = styled.div`
+  color: red;
+
+
+`
 const StyledDiv = styled.div`
   margin: 20px;
   background: lightblue;
@@ -62,4 +67,4 @@ const StyledDiv = styled.div`
   
   `;
 
-export {StyledDiv, Container, StyledNav};
+export {StyledDiv, Container, StyledNav,DoneDiv};

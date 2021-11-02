@@ -70,8 +70,8 @@ exports.updateList = async (req, res) => {
       edited: today,
       $push:{
         content:{
-          Title:item,
-          Done: false,
+          title:item,
+          
         }
       },
       
@@ -126,3 +126,48 @@ exports.deleteList = async (req, res) => {
     });
   }
 };
+
+exports.itemDone = async (req, res) => {
+  const listId = req.params.id;
+  const itemId = req.body.itemId;
+  
+  let currentDate = new Date();
+  let today = currentDate.getDate() + "/"
+  + (currentDate.getMonth()+1)  + "/" 
+  + currentDate.getFullYear();
+  console.log(today);
+  try {
+    const list = await List.findOneAndUpdate(
+    {
+     _id: listId, 
+     "content._id":itemId,
+    },
+    {$set:{
+      'content.$.done':true,  
+    }},
+      
+    
+    {
+      edited: today,
+    
+      
+    },
+    
+    
+    );
+    res.status(200).json({
+      status: "success",
+      data: {
+        list,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
+
+

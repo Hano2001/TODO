@@ -16,7 +16,8 @@ export default function CreateList() {
           url: 'http://localhost:5000/lists',
           method: 'POST',
           data: payload,
-        }).then(alert('List Created!'));
+        }).then(alert('List Created!'))
+        window.location.reload();
     
         
     }
