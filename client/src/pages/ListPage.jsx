@@ -14,6 +14,10 @@ export default function ListPage() {
     }
 
     function deleteList(id) {
+        let answer= window.confirm("Are you sure?")
+        if(answer){
+
+        
         axios
             .delete(`http://localhost:5000/lists/${id}`)
             .then(() => {
@@ -21,6 +25,7 @@ export default function ListPage() {
 
                 getListData();
             });
+        }
     }
 
     async function itemDone(itemId,listId,doneStatus){
@@ -96,6 +101,7 @@ export default function ListPage() {
                     
                     {showDone?
                     <DoneDiv>
+                    <h3>Done Tasks</h3>
                     {list.content.map((item) => {
                         if(item.done === true){
                             

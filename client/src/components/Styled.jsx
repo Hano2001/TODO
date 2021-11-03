@@ -1,25 +1,30 @@
 
 import styled from 'styled-components';
 const ItemDiv = styled.div`
-  font-family: Lucidatypewriter;
-    font-weight: bold;
-    color: black;
+  font-family: Lucida Handwriting;
+  color:blue;
+  
+    font-size: 20px;
     width: auto;
     margin-bottom:10px;
-    background:#33ccff;
+    background:#ffeb99;
+    text-decoration: underline;
+    text-decoration-color: red; 
     border: 1px solid black;
     border-width:1px 0 1px 1px;
     padding: 15px;
 
 `
 const DoneDiv = styled.div`
-font-family: Lucidatypewriter;
-    font-weight: cursive;
-    text-decoration: line-through;
-    color: black;
-    width: auto;
-    margin-bottom:10px;
-    background:red;
+  p{
+    color: grey;
+  
+    font-style: oblique;
+  }
+  
+    
+    
+    background:lightGreen;
     border: 1px solid black;
     border-width:1px 0 1px 1px;
     padding: 15px;
@@ -37,7 +42,7 @@ const Container = styled.div`
 
 const StyledDiv = styled.div`
   margin: 20px;
-  background: lightblue;
+  background: #ffe066;
 
   
   
