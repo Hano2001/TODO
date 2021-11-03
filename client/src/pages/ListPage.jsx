@@ -5,6 +5,7 @@ import { StyledDiv, Container, DoneDiv, ItemDiv } from '../components/Styled';
 
 export default function ListPage() {
     const [listData, setListData] = useState(null);
+    
 
     async function getListData() {
 
@@ -22,9 +23,10 @@ export default function ListPage() {
             });
     }
 
-    async function itemDone(itemId,listId){
+    async function itemDone(itemId,listId,doneStatus){
        const payLoad = {
-           itemId :itemId
+           itemId :itemId,
+           doneStatus: doneStatus
        }
        await axios({
             url: `http://localhost:5000/lists/content/${listId}`,
@@ -34,6 +36,19 @@ export default function ListPage() {
         getListData();
 
     }
+    async function removeItem(itemId,listId){
+        const payLoad = {
+            itemId :itemId
+        }
+        await axios({
+             url: `http://localhost:5000/lists/content/delete/${listId}`,
+             method: 'POST',
+             data: payLoad,
+         });
+         console.log("Removed Item")
+         getListData();
+ 
+     }
 
     async function addItem(e, id) {
         e.preventDefault();
@@ -53,7 +68,7 @@ export default function ListPage() {
     }
 
     function ListCard({ list }) {
-
+        const [showDone, setShowDone] = useState(false);
         return (
             <div>
 
@@ -74,12 +89,12 @@ export default function ListPage() {
                         return (
                             <ItemDiv>
                                 <p key={item._id}>{item.title}</p>
-                                <button onClick={() => itemDone(item._id,list._id)}>DONE</button>
+                                <button onClick={() => itemDone(item._id,list._id, item.done)}>Done</button>
                             </ItemDiv>)
                         }
                     })}
                     
-
+                    {showDone?
                     <DoneDiv>
                     {list.content.map((item) => {
                         if(item.done === true){
@@ -87,12 +102,15 @@ export default function ListPage() {
                         return (
                             <ItemDiv>
                                 <p key={item._id}>{item.title}</p>
-                                {/* <button onClick={() => itemDone(item._id,list._id)}>DONE</button> */}
+                                <button onClick={() => removeItem(item._id,list._id)}>Remove</button>
+                                <button onClick={() => itemDone(item._id,list._id, item.done)}>Reactivate</button>
                             </ItemDiv>)
                         }
                     })}
                     </DoneDiv>
-                    {/* <button type="button" onClick={()}></button> */}
+                    :null}
+                    {/* <button type="button" onClick={()=> setShowDone(true)}>Show done tasks</button> */}
+                    <button type="button" onClick={()=> setShowDone(!showDone)}>Done Tasks</button>
                     
 
 
