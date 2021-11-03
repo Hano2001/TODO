@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CreateList from "../components/CreateList";
-import { StyledDiv, Container } from '../components/Styled';
+import { StyledDiv, Container, DoneDiv, ItemDiv } from '../components/Styled';
 
 export default function ListPage() {
     const [listData, setListData] = useState(null);
@@ -22,11 +22,11 @@ export default function ListPage() {
             });
     }
 
-    function itemDone(itemId,listId){
+    async function itemDone(itemId,listId){
        const payLoad = {
            itemId :itemId
        }
-        axios({
+       await axios({
             url: `http://localhost:5000/lists/content/${listId}`,
             method: 'POST',
             data: payLoad,
@@ -35,7 +35,7 @@ export default function ListPage() {
 
     }
 
-    function addItem(e, id) {
+    async function addItem(e, id) {
         e.preventDefault();
         console.log(e.target[0].value);
         console.log(id)
@@ -44,7 +44,7 @@ export default function ListPage() {
         const payLoad = {
             item: newItem,
         }
-        axios({
+        await axios({
             url: `http://localhost:5000/lists/${id}`,
             method: 'POST',
             data: payLoad,
@@ -66,13 +66,34 @@ export default function ListPage() {
 
                     </form>
                     <h2>{list.title}</h2>
+                    
                     {list.content.map((item) => {
+                        if(item.done === false){
+                            
+                        
                         return (
-                            <div>
+                            <ItemDiv>
                                 <p key={item._id}>{item.title}</p>
                                 <button onClick={() => itemDone(item._id,list._id)}>DONE</button>
-                            </div>)
+                            </ItemDiv>)
+                        }
                     })}
+                    
+
+                    <DoneDiv>
+                    {list.content.map((item) => {
+                        if(item.done === true){
+                            
+                        return (
+                            <ItemDiv>
+                                <p key={item._id}>{item.title}</p>
+                                {/* <button onClick={() => itemDone(item._id,list._id)}>DONE</button> */}
+                            </ItemDiv>)
+                        }
+                    })}
+                    </DoneDiv>
+                    {/* <button type="button" onClick={()}></button> */}
+                    
 
 
                     <button type="button" onClick={() => deleteList(list._id)}>DELETE LIST</button>

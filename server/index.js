@@ -1,8 +1,12 @@
 const server = require("./app");
+require('dotenv').config();
 var express = require("express");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000;
-const db = "mongodb://localhost:27027/todo";
+const db = process.env.DATABASE.replace(
+    '<PASSWORD>',
+    process.env.DATABASE_PASSWORD,
+  );
 mongoose.connect(db).then(() => console.log("connected successfully"));
 server.listen(PORT, () => `Server running on port ${PORT}`);
 
