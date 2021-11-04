@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CreateList from "../components/CreateList";
-import { StyledDiv, Container, DoneDiv, ItemDiv } from '../components/Styled';
+import { StyledDiv, Container, DoneDiv, ItemDiv, MainDiv} from '../components/Styled';
 
 export default function ListPage() {
     const [listData, setListData] = useState(null);
@@ -50,15 +50,15 @@ export default function ListPage() {
              method: 'POST',
              data: payLoad,
          });
-         console.log("Removed Item")
+         
          getListData();
  
      }
 
     async function addItem(e, id) {
         e.preventDefault();
-        console.log(e.target[0].value);
-        console.log(id)
+        
+       
 
         const newItem = e.target[0].value;
         const payLoad = {
@@ -137,13 +137,14 @@ export default function ListPage() {
 
 
     return (
-        <div>
+        <MainDiv>
+            <h1>Welcome to Harald's little TODO-Application!</h1>
             <CreateList />
             <Container>
 
                 {listData ? listData.map((item, index) => <ListCard list={item} key={item._id} />) : (<h5>Laddar...</h5>)}
 
             </Container>
-        </div>
+        </MainDiv>
     )
 }

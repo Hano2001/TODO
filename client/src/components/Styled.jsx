@@ -1,5 +1,11 @@
 
 import styled from 'styled-components';
+const MainDiv = styled.div`
+background: orange;
+height: 100%;
+width: 100%;
+position: fixed;
+`
 const ItemDiv = styled.div`
   font-family: Lucida Handwriting;
   color:blue;
@@ -56,8 +62,9 @@ const Container = styled.div`
 `
 
 const StyledDiv = styled.div`
-  margin: 20px;
+  
   background: #ffe066;
+  width: 100%;
 
   
   
@@ -66,4 +73,4 @@ const StyledDiv = styled.div`
   
   `;
 
-export {StyledDiv, Container  ,DoneDiv, ItemDiv};
+export {StyledDiv, Container  ,DoneDiv, ItemDiv, MainDiv};
