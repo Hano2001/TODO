@@ -108,8 +108,8 @@ export default function ListPage() {
                         return (
                             <ItemDiv>
                                 <p key={item._id}>{item.title}</p>
-                                <button onClick={() => removeItem(item._id,list._id)}>Remove</button>
                                 <button onClick={() => itemDone(item._id,list._id, item.done)}>Reactivate</button>
+                                <button onClick={() => removeItem(item._id,list._id)}>Remove</button>
                             </ItemDiv>)
                         }
                     })}
