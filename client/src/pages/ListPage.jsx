@@ -81,7 +81,7 @@ export default function ListPage() {
                     <p>Last edited: {list.edited}</p>
                     <form onSubmit={e => addItem(e, list._id)}>
                         <label htmlFor="item">Add Item: </label>
-                        <input type="text" name="item" id="item" />
+                        <input type="text" name="item" id="item" autocomplete="off" />
                         <button type="submit">Add to list</button>
 
                     </form>
