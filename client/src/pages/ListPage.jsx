@@ -4,12 +4,13 @@ import CreateList from "../components/CreateList";
 import { StyledDiv, Container, DoneDiv, ItemDiv, MainDiv} from '../components/Styled';
 
 export default function ListPage() {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [listData, setListData] = useState(null);
     
 
     async function getListData() {
 
-        const { data } = await axios.get("http://localhost:5000/lists");
+        const { data } = await axios.get(`${apiUrl}/lists`);
         await setListData(data.data.list);
     }
 
@@ -19,7 +20,7 @@ export default function ListPage() {
 
         
         axios
-            .delete(`http://localhost:5000/lists/${id}`)
+            .delete(`${apiUrl}/lists/${id}`)
             .then(() => {
                 alert("List deleted!");
 
@@ -34,7 +35,7 @@ export default function ListPage() {
            doneStatus: doneStatus
        }
        await axios({
-            url: `http://localhost:5000/lists/content/${listId}`,
+            url: `${apiUrl}/lists/content/${listId}`,
             method: 'POST',
             data: payLoad,
         });
@@ -46,7 +47,7 @@ export default function ListPage() {
             itemId :itemId
         }
         await axios({
-             url: `http://localhost:5000/lists/content/delete/${listId}`,
+             url: `${apiUrl}/lists/content/delete/${listId}`,
              method: 'POST',
              data: payLoad,
          });
@@ -65,7 +66,7 @@ export default function ListPage() {
             item: newItem,
         }
         await axios({
-            url: `http://localhost:5000/lists/${id}`,
+            url: `${apiUrl}/lists/${id}`,
             method: 'POST',
             data: payLoad,
         });
@@ -81,7 +82,7 @@ export default function ListPage() {
                     <p>Last edited: {list.edited}</p>
                     <form onSubmit={e => addItem(e, list._id)}>
                         <label htmlFor="item">Add Item: </label>
-                        <input type="text" name="item" id="item" autocomplete="off" />
+                        <input type="text" name="item" id="item" autoComplete="off" />
                         <button type="submit">Add to list</button>
 
                     </form>
@@ -92,8 +93,8 @@ export default function ListPage() {
                             
                         
                         return (
-                            <ItemDiv>
-                                <p key={item._id}>{item.title}</p>
+                            <ItemDiv key={item._id}>
+                                <p>{item.title}</p>
                                 <button onClick={() => itemDone(item._id,list._id, item.done)}>Done</button>
                             </ItemDiv>)
                         }
@@ -106,8 +107,8 @@ export default function ListPage() {
                         if(item.done === true){
                             
                         return (
-                            <ItemDiv>
-                                <p key={item._id}>{item.title}</p>
+                            <ItemDiv key={item._id}>
+                                <p>{item.title}</p>
                                 <button onClick={() => itemDone(item._id,list._id, item.done)}>Reactivate</button>
                                 <button onClick={() => removeItem(item._id,list._id)}>Remove</button>
                             </ItemDiv>)

@@ -13,7 +13,7 @@ export default function CreateList() {
           
           };
         axios({
-          url: 'http://localhost:5000/lists',
+          url: `${process.env.REACT_APP_API_URL}/lists`,
           method: 'POST',
           data: payload,
         }).then(alert('List Created!'))
