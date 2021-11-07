@@ -62,7 +62,9 @@ const Container = styled.div`
 `
 
 const StyledDiv = styled.div`
-  
+  input{
+    margin-bottom: 15px;
+  }
   background: #ffe066;
   width: 100%;
 

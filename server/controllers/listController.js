@@ -33,12 +33,8 @@ exports.createList = async (req, res) => {
   const title = req.body.title;
 
   try {
-    console.log(`TITLE: ${title}`);
-
-    console.log(req.body);
     const listExists = await List.exists({ title: req.body.title });
     if (listExists) {
-      console.log("FINNS REDAN!");
       throw Error("List already exists");
     } else {
       const newList = await List.create(req.body);
@@ -176,7 +172,7 @@ exports.deleteItem = async (req, res) => {
         },
       }
     );
-    console.log("REMOVED ITEM");
+
     res.status(200).json({
       status: "success",
       data: {
