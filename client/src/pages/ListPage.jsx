@@ -10,7 +10,8 @@ export default function ListPage() {
 
     async function getListData() {
 
-        const { data } = await axios.get(`${apiUrl}/lists`);
+        const { data } = await axios.get(`${apiUrl}/lists`,
+        {withCredentials:true});
         await setListData(data.data.list);
     }
 
@@ -20,7 +21,8 @@ export default function ListPage() {
 
         
         axios
-            .delete(`${apiUrl}/lists/${id}`)
+            .delete(`${apiUrl}/lists/${id}`,
+            {withCredentials:true})
             .then(() => {
                 alert("List deleted!");
 
@@ -37,6 +39,7 @@ export default function ListPage() {
        await axios({
             url: `${apiUrl}/lists/content/${listId}`,
             method: 'POST',
+            withCredentials:true,
             data: payLoad,
         });
         getListData();
@@ -49,6 +52,7 @@ export default function ListPage() {
         await axios({
              url: `${apiUrl}/lists/content/delete/${listId}`,
              method: 'POST',
+             withCredentials:true,
              data: payLoad,
          });
          
@@ -68,6 +72,7 @@ export default function ListPage() {
         await axios({
             url: `${apiUrl}/lists/${id}`,
             method: 'POST',
+            withCredentials:true,
             data: payLoad,
         });
         getListData();

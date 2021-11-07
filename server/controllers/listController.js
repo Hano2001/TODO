@@ -157,6 +157,7 @@ exports.itemDone = async (req, res) => {
 exports.deleteItem = async (req, res) => {
   const listId = req.params.id;
   const itemId = req.body.itemId;
+  console.log("TEST");
 
   try {
     const list = await List.findOneAndUpdate(

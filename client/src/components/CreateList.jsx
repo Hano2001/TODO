@@ -15,6 +15,7 @@ export default function CreateList() {
         axios({
           url: `${process.env.REACT_APP_API_URL}/lists`,
           method: 'POST',
+          withCredentials:true,
           data: payload,
         }).then(alert('List Created!'))
         window.location.reload();
