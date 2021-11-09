@@ -1,7 +1,19 @@
-[{
+{"_id": {
+  "$oid": "618a6e35a4af2e1b50c5cd4b"
+},
+"title": "kalaset",
+"edited": "9/11/2021",
+"content": [{
+  "title": "Content Item 1",
+  "done": false,
   "_id": {
-    "$oid": "615e0eaadc81e55bececdb75"
-  },
-  "title": "title of object",
-  "content": "content of object"
-}]
+      "$oid": "618a6e73a4af2e1b50c5cd51"
+  }
+}, {
+  "title": "Content Item 2",
+  "done": true,
+  "_id": {
+      "$oid": "618a6e7ba4af2e1b50c5cd58"
+  }
+}],
+"__v": 0}
